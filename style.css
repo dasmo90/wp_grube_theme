@@ -1277,12 +1277,25 @@ color: #000000;
     color: white;
 }
 
+.c-priceCalc {
+    border-top: #009688 1pt solid;
+    border-left: #009688 12pt solid;
+    border-bottom: #009688 1pt solid;
+    padding-bottom: 15pt;
+    padding-left: 10pt;
+}
+
 * + .c-priceCalc__label {
     margin-top: 20px;
 }
 
 .c-priceCalc__select {
     margin-top: 5px;
+}
+
+a.anchor {
+    position: relative;
+    top: -80px;
 }
 
 /*
@@ -1383,6 +1396,13 @@ color: #000000;
     body{
         font-size: 16px
     }
+
+    /* changed responsive behaviour */
+    .content-area {
+        padding-left: 0pt;
+        padding-right: 0pt;
+    }
+
     .site-header{
         position: relative;
         width: 100%;

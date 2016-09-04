@@ -1,0 +1,53 @@
+<div id="price_calc">
+    <h3 >Preisrechner</h3>
+    <div class="c-priceCalc__label"><label for="arrival_month">Wann wollen Sie anreisen?</label></div>
+    <div class="c-priceCalc__select">
+        <select id="arrival_month" name="arrival_month" onchange="price_calc_changed()">
+            <option selected value=''>--Monat auswählen--</option>
+            <option value='1'>Januar</option>
+            <option value='2'>Februar</option>
+            <option value='3'>März</option>
+            <option value='4'>April</option>
+            <option value='5'>Mai</option>
+            <option value='6'>Juni</option>
+            <option value='7'>Juli</option>
+            <option value='8'>August</option>
+            <option value='9'>September</option>
+            <option value='10'>Oktober</option>
+            <option value='11'>November</option>
+            <option value='12'>Dezember</option>
+        </select>
+    </div>
+    <div class="c-priceCalc__label"><label for="guests">Mit wie vielen Personen reisen Sie an?</label></div>
+    <div class="c-priceCalc__select">
+        <select id="guests" name="guests" onchange="price_calc_changed()">
+            <option selected value=''>--Anzahl auswählen--</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+            <option value='6'>6</option>
+        </select>
+    </div>
+    <div class="c-priceCalc__label">
+        <strong>Preis pro Übernachtung: <span id="price_per_night" style="margin-left: 10pt;">-</span></strong>
+    </div>
+    <script>
+        function adjust_price(value) {
+            value -= 0.01;
+            return value.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+,)/g, '$1.') + ' €';
+        }
+
+        function price_calc_changed() {
+            var arrivalMonth = document.getElementById("arrival_month").selectedIndex;
+            var guests = document.getElementById("guests").selectedIndex;
+
+            if(arrivalMonth > 0 && guests > 0) {
+                document.getElementById("price_per_night").innerHTML = adjust_price(arrivalMonth * guests * 55);
+            } else {
+                document.getElementById("price_per_night").innerHTML = '-';
+            }
+        }
+    </script>
+</div>

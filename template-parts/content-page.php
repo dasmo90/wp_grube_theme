@@ -20,7 +20,7 @@
 
 	
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php the_content_filtered(); ?>
 		<?php
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'nisarg' ),

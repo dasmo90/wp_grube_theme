@@ -225,4 +225,34 @@ function nisarg_get_link_url() {
 	return ( $nisarg_has_url ) ? $nisarg_has_url : apply_filters( 'the_permalink', get_permalink() );
 }
 
+/**
+* Display the post content.
+*
+* @since 0.71
+*
+* @param string $more_link_text Optional. Content for when there is more text.
+* @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
+*/
+function the_content_filtered( $more_link_text = null, $strip_teaser = false) {
+	$content = get_the_content( $more_link_text, $strip_teaser );
 
+	/**
+	* Filters the post content.
+	*
+	* @since 0.71
+	*
+	* @param string $content Content of the current post.
+	*/
+	$content = apply_filters( 'the_content', $content );
+	$content = str_replace( ']]>', ']]&gt;', $content );
+
+	$price_calc = file_get_contents('html/price_calc.html', FILE_USE_INCLUDE_PATH);
+	$content = str_replace( '!++price_calc++!', $price_calc, $content );
+	echo $content;
+}
+
+function the_exerpt_filtered() {
+	$content = apply_filters( 'the_excerpt', get_the_excerpt() );
+	$content = str_replace( '!++price_calc++!', '<p>(<a href="?page_id=30#price_calc">Preisrechner</a>)</p>', $content );
+	echo $content;
+}

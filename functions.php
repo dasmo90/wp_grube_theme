@@ -248,6 +248,12 @@ function the_content_filtered( $more_link_text = null, $strip_teaser = false) {
 
 	$price_calc = file_get_contents('html/price_calc.html', FILE_USE_INCLUDE_PATH);
 	$content = str_replace( '!++price_calc++!', $price_calc, $content );
+
+	ob_start();
+	include('html/reservation_plan.html');
+	$reservation_plan = ob_get_clean();
+
+	$content = str_replace( '!++reservation_plan++!', $reservation_plan, $content );
 	echo $content;
 }
 

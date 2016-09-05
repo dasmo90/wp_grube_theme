@@ -403,7 +403,7 @@ function nisarg_get_color_scheme_css( $colors ) {
 	    padding: 0.2em;
 	}
 
-	.c-priceCalc {
+	.c-widget {
 		border-color: {$colors['accent_color']};
 	}
 

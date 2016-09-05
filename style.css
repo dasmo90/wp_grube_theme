@@ -1277,7 +1277,7 @@ color: #000000;
     color: white;
 }
 
-.c-priceCalc {
+.c-widget {
     border-top: darkgray 1pt solid;
     border-left: darkgray 12pt solid;
     border-bottom: darkgray 1pt solid;
@@ -1291,6 +1291,21 @@ color: #000000;
 
 .c-priceCalc__select {
     margin-top: 5px;
+}
+
+.c-calendar__month {
+    border-bottom: darkgray 1pt dashed;
+    padding: 8px 0 10px;
+}
+
+.c-calendar__month:last-child {
+    border-bottom: none;
+    padding: 8px 0 0;
+}
+
+.c-calendar__monthView.visible {
+    display: block;
+    margin-top: 10px;
 }
 
 a.anchor {

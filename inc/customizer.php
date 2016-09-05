@@ -401,7 +401,11 @@ function nisarg_get_color_scheme_css( $colors ) {
 	    background-color: {$colors['accent_color']};
 	    color: #fff;
 	    padding: 0.2em;
-	}	
+	}
+
+	.c-priceCalc {
+		border-color: {$colors['accent_color']};
+	}
 
 CSS;
 

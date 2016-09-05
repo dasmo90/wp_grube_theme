@@ -1278,9 +1278,9 @@ color: #000000;
 }
 
 .c-priceCalc {
-    border-top: #009688 1pt solid;
-    border-left: #009688 12pt solid;
-    border-bottom: #009688 1pt solid;
+    border-top: darkgray 1pt solid;
+    border-left: darkgray 12pt solid;
+    border-bottom: darkgray 1pt solid;
     padding-bottom: 15pt;
     padding-left: 10pt;
 }

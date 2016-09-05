@@ -253,6 +253,6 @@ function the_content_filtered( $more_link_text = null, $strip_teaser = false) {
 
 function the_exerpt_filtered() {
 	$content = apply_filters( 'the_excerpt', get_the_excerpt() );
-	$content = str_replace( '!++price_calc++!', '<p><a href="?page_id=30#price_calc">&raquo; Preisrechner</a></p>', $content );
+	$content = str_replace( '!++price_calc++!', '<p><a href="preise#price_calc">&raquo; Preisrechner</a></p>', $content );
 	echo $content;
 }

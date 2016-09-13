@@ -39,13 +39,13 @@ get_header(); ?>
 									 */
 									$post_display_option = get_theme_mod('post_display_option','post-excerpt');
 									
-		    						if($post_display_option == 'post-excerpt'){
-		        						get_template_part( 'template-parts/content','excerpt');
-		        					}
-		        					else{
-		        						get_template_part( 'template-parts/content', get_post_format() );
-		        					}
-									
+									if($post_display_option == 'post-excerpt'){
+										get_template_part( 'template-parts/content','excerpt');
+									}
+									else{
+									get_template_part( 'template-parts/content', get_post_format() );
+									}
+
 								?>
 
 							<?php endwhile; ?>

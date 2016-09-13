@@ -145,7 +145,7 @@ table,th,td{
 }
 
 th, td {
-  padding: 0.7em;
+  padding: 0.6em;
   text-align: left;
  
 }
@@ -1295,17 +1295,70 @@ color: #000000;
 
 .c-calendar__month {
     border-bottom: darkgray 1pt dashed;
-    padding: 8px 0 10px;
+    padding: 8px 8px 10px 0;
+    display: inline-block;
+    width: 50%;
 }
 
-.c-calendar__month:last-child {
-    border-bottom: none;
-    padding: 8px 0 0;
+.c-calendar__monthHeader {
+    position: relative;
+}
+.c-calendar__monthView {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.c-calendar__monthView table {
+    table-layout: fixed;
 }
 
 .c-calendar__monthView.visible {
     display: block;
-    margin-top: 10px;
+}
+
+.c-calendar__day.inMonth{
+    font-weight: bold;
+}
+
+.c-calendar__day.reserved{
+    background-color: indianred;
+    color: white;
+}
+
+.c-calendar__day.halfReserved{
+    background-color: lightsalmon;
+    color: white;
+}
+
+.c-calendar__monthReservation {
+    display: none;
+    position: absolute;
+    right: 0;
+}
+
+.c-calendar__monthReservation::after {
+    border-radius: 7px;
+    content: " ";
+    display: inline-block;
+    height: 14px;
+    margin-left: 6px;
+    width: 28px;
+}
+
+.c-calendar__monthReservation.full::after {
+    background-color: indianred;
+}
+
+.c-calendar__monthReservation.almostFull::after {
+    background-color: lightsalmon;
+}
+
+.c-calendar__monthReservation.almostEmpty::after {
+    background-color: yellowgreen;
+}
+
+.c-calendar__monthReservation.empty::after {
+    background-color: forestgreen;
 }
 
 a.anchor {
@@ -1400,9 +1453,8 @@ a.anchor {
         width: auto;
     }
 
+    /** changed */
     th, td {
-      padding: 0.2em;
-      text-align: left;
       border: 1px solid #B6B6B6;
     }
 
@@ -1449,8 +1501,47 @@ a.anchor {
     }
     .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
         border-top: none;
-    }    
+    }
 }
+
+/* calendar one column layout */
+@media (max-width: 650px) {
+
+    .c-calendar__month {
+        display: block;
+        width: auto;
+    }
+
+    .c-calendar__month:last-child {
+        border-bottom: none;
+        padding: 8px 8px 0 0;
+    }
+
+    .c-calendar__monthHeader {
+        cursor: pointer;
+    }
+
+    .c-calendar__monthReservation {
+        display: inline;
+    }
+
+    .c-calendar__monthView {
+        display: none;
+        text-align: center;
+    }
+
+    .c-calendar__monthView .emptyWeek {
+        display: none;
+    }
+
+    .c-calendar__monthTable {
+        max-width: 380px;
+        display: inline-block;
+    }
+
+
+}
+
 @media (max-width: 359px) {
     .site-header{
         position: relative;

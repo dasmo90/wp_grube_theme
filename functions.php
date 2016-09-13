@@ -185,6 +185,11 @@ require get_template_directory() . '/inc/jetpack.php';
  */
 require get_template_directory() . '/inc/navwalker.php';
 
+/**
+ * load reservation plan functions
+ */
+require get_template_directory() . '/inc/reservation-plan.php';
+
 
 function nisarg_google_fonts() {
 	$query_args = array(

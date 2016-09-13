@@ -252,18 +252,19 @@ function the_content_filtered( $more_link_text = null, $strip_teaser = false) {
 	$content = str_replace( ']]>', ']]&gt;', $content );
 
 	$price_calc = file_get_contents('html/price_calc.html', FILE_USE_INCLUDE_PATH);
-	$content = str_replace( '!++price_calc++!', $price_calc, $content );
+	$content = str_replace( '!++price_calc++!', $price_calc, $content);
 
 	ob_start();
 	include('html/reservation_plan.html');
 	$reservation_plan = ob_get_clean();
 
-	$content = str_replace( '!++reservation_plan++!', $reservation_plan, $content );
+	$content = str_replace( '!++reservation_plan++!', $reservation_plan, $content);
 	echo $content;
 }
 
 function the_exerpt_filtered() {
 	$content = apply_filters( 'the_excerpt', get_the_excerpt() );
-	$content = str_replace( '!++price_calc++!', '<p><a href="preise#price_calc">&raquo; Preisrechner</a></p>', $content );
+	$content = str_replace( '!++price_calc++!', '<p><a href="preise#price_calc">&raquo; Preisrechner</a></p>', $content);
+	$content = str_replace( '!++reservation_plan++!', '<p><a href="#">&raquo; Reservierungsplan</a></p>', $content);
 	echo $content;
 }

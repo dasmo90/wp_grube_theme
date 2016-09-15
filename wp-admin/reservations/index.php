@@ -9,7 +9,7 @@ $pageName = 'Reservierungen';
 
 <div class="container">
     <div class="row">
-        <div id="primary" class="col-md-9 content-area">
+        <div id="primary" class="col-md-12 content-area">
             <main id="main" class="site-main" role="main">
 
                 <article class = "post-content">
@@ -23,8 +23,30 @@ $pageName = 'Reservierungen';
 
 
                     <div class="entry-content">
-                        Test
+                        <div class="c-grubeWidget c-reservations">
+                            <a id="reservations"></a>
+                            <h3>Reservierung hinzufügen</h3>
+                            <form method="get" action="#reservations">
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input class="form-control" type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="arrival_day">Anreisetag:</label>
+                                    <input class="form-control" type="date" id="arrival_day" name="arrival_day" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="departure_day">Abreisetag:</label>
+                                    <input class="form-control" type="date" id="departure_day" name="departure_day" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Speichern</button>
+                            </form>
+                        </div>
+
+                        <?php echo htmlspecialchars($_GET['arrival_day']); ?>
+
                     </div>
+
 
                     <footer class="entry-footer"></footer>
 

@@ -1,2 +1,17 @@
 .idea/
 *.iml
+
+/wp-includes/*
+
+/wp-content/*
+!/wp-content/themes
+/wp-content/themes/*
+!/wp-content/themes/wp_grube_theme
+
+/wp-admin/*
+!/wp-admin/reservations
+
+.htaccess
+/*.php
+/*.html
+/*.txt

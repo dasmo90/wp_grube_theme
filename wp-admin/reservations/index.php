@@ -6,13 +6,24 @@ get_header();
 
 global $wpdb;
 
-$tableName = 'reservations';
+define('RESERVATIONS_TABLE', 'reservations');
+
+define('ARRIVAL_KEY', 'arrival_day');
+define('DEPARTURE_KEY', 'departure_day');
+define('NAME_KEY', 'name');
+define('METHOD_KEY', 'method');
+define('ID_KEY', 'id');
+
+define('MSG_WRONG_ORDER',
+    '<p class="form-error-message">Anreisetag muss <strong>vor</strong> dem Abreisetag liegen</p>');
+
 $pageName = 'Reservierungen';
 $format = 'd.m.Y';
 
 
 function hasCollision($arrivalDate, $departureDate) {
-    global $wpdb, $tableName;
+    global $wpdb;
+    $tableName = RESERVATIONS_TABLE;
     $query = "SELECT COUNT(*)
               FROM $tableName
               WHERE
@@ -33,7 +44,7 @@ function saveToDataBase($arrivalTime, $departureTime, $name) {
     if(hasCollision($arrivalDate, $departureDate)) {
         return -2;
     }
-    $result = $wpdb->insert('reservations', array(
+    $result = $wpdb->insert(RESERVATIONS_TABLE, array(
         'name' => $name,
         'start' => $arrivalDate,
         'end' => $departureDate
@@ -44,10 +55,58 @@ function saveToDataBase($arrivalTime, $departureTime, $name) {
     return -3;
 }
 
-function formInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
+function deleteFromDataBase($id) {
+    global $wpdb;
+    $result = $wpdb->delete(RESERVATIONS_TABLE, array('id' => $id));
+    if($result === false) {
+        return -1;
+    }
+    elseif ($result === 0) {
+        return -2;
+    }
+    return $result;
+}
+
+function uiMessage($template) {
+    if($template === 'add:success') {
+        $arg1 = func_get_arg(1);
+        $arg2 = func_get_arg(2);
+        return "<div class='alert alert-success text-left'>
+                    <p>Die Reservierung ($arg1 bis $arg2) wurde erfolgreich eingetragen</p>
+                </div>";
+    }
+    elseif($template === 'add:error') {
+        $arg1 = func_get_arg(1);
+        return "<div class='alert alert-danger text-left'>
+                    <p>Beim Eintragen der Reservierung ist ein Fehler aufgetreten. (Code: 52$arg1)</p>
+                </div>";
+    }
+    elseif($template === 'delete:success') {
+        return '<div class="alert alert-success text-left"><p>Die Reservierung wurde erfolgreich gelöscht.</p></div>';
+    }
+    elseif($template === 'delete:error') {
+        $arg1 = func_get_arg(1);
+        return "<div class='alert alert-danger text-left'>
+                    <p>Beim Löschen ist ein Fehler aufgetreten (Code: 52$arg1)</p>
+                </div>";
+    }
+    return null;
+}
+
+function uiDeleteLink($id, $label, $style = 'primary') {
+    $methodKey = METHOD_KEY;
+    $idKey = ID_KEY;
+    return "<form method='post' action='#reservations'>
+        <input type='hidden' name='$methodKey' value='delete'>
+        <input type='hidden' name='$idKey' value='$id'>
+        <button class='btn btn-$style grube--right-centered' type='submit'>$label</button>
+    </form>";
+}
+
+function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
     $inputClass = $valid ? '' : ' invalid';
     $message = $valid ? '' : "<p class='form-error-message'>$fieldName ist ungültig.</p>";
-    echo "<div class='form-group'>
+    return "<div class='form-group'>
             <label for='arrival_day'>$fieldName:</label>
               <input class='form-control$inputClass'
                      type='$type'
@@ -77,49 +136,67 @@ function formInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
 
                     <?php
 
-                    $arrivalKey = 'arrival_day';
-                    $arrivalValue = htmlspecialchars($_POST[$arrivalKey]);
-                    $arrivalTime = strtotime($arrivalValue);
-                    $departureKey = 'departure_day';
-                    $departureValue = htmlspecialchars($_POST[$departureKey]);
-                    $departureTime = strtotime($departureValue);
-                    $nameKey = 'name';
-                    $nameValue = htmlspecialchars($_POST[$nameKey]);
-                    $nameValid = $nameValue != null && $nameValue != '';
+                    uiMessage('', 'tes', 'te', 't');
+
+                    // defaults
+                    $arrivalTime = true;
+                    $departureTime = true;
+                    $nameValid = true;
+
+                    $arrivalValue = '';
+                    $departureValue = '';
+                    $nameValue = '';
 
                     $wrongOrderMessage = '';
                     $message = '';
 
-                    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $addedId = -1;
 
-                        if($arrivalTime && $departureTime) {
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-                            if($arrivalTime < $departureTime) {
-                                $success = saveToDataBase($arrivalTime, $departureTime, $nameValue);
+                        $method = htmlspecialchars($_POST[METHOD_KEY]);
 
-                                if($success > 0) {
-                                    $arrivalDatePretty = date($format, $arrivalTime);
-                                    $departureDatePretty = date($format, $departureTime);
-                                    $message = "<p>Die Reservierung ($arrivalDatePretty bis $departureDatePretty) wurde erfolgreich eingetragen.</p>";
-                                    $arrivalValue = '';
-                                    $departureValue = '';
-                                    $nameValue = '';
+                        if ($method === 'add') {
+                            $arrivalValue = htmlspecialchars($_POST[ARRIVAL_KEY]);
+                            $departureValue = htmlspecialchars($_POST[DEPARTURE_KEY]);
+                            $nameValue = htmlspecialchars($_POST[NAME_KEY]);
+
+                            $arrivalTime = strtotime($arrivalValue);
+                            $departureTime = strtotime($departureValue);
+                            $nameValid = $nameValue != null && $nameValue != '';
+
+                            // handle data of add
+                            if($arrivalTime && $departureTime) {
+                                if($arrivalTime < $departureTime) {
+                                    $result = saveToDataBase($arrivalTime, $departureTime, $nameValue);
+
+                                    if($result > 0) {
+                                        $addedId = $result;
+                                        $arrivalDatePretty = date($format, $arrivalTime);
+                                        $departureDatePretty = date($format, $departureTime);
+                                        $deleteLink = uiDeleteLink($result, 'Rückgängig');
+                                        $message = uiMessage('add:success', $arrivalDatePretty, $departureDatePretty);
+                                        $arrivalValue = '';
+                                        $departureValue = '';
+                                        $nameValue = '';
+                                    } else {
+                                        $message = uiMessage('add:error', -$result);
+                                    }
                                 } else {
-                                    $errorCode = -$success;
-                                    $message = "<p>Beim Eintragen der Reservierung ist ein Fehler aufgetreten. (Code: 52$errorCode)";
+                                    $wrongOrderMessage = MSG_WRONG_ORDER;
                                 }
-                            } else {
-                                $wrongOrderMessage =
-                                    '<p class="form-error-message">Anreisetag muss <strong>vor</strong> dem Abreisetag liegen</p>';
                             }
                         }
-
-                    } else {
-                        $arrivalTime = true;
-                        $departureTime = true;
-                        $nameValid = true;
+                        elseif ($method === 'delete') {
+                            $id = htmlspecialchars($_POST[ID_KEY]);
+                            $result = deleteFromDataBase($id);
+                            if($result > 0) {
+                                $message = uiMessage('delete:success');
+                            } else {
+                                $message = uiMessage('delete:error', -$result);
+                            }
+                        }
                     }
-
                     ?>
 
                     <div class="entry-content">
@@ -128,10 +205,12 @@ function formInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
                             <a id="reservations"></a>
                             <h3>Reservierung hinzufügen</h3>
                             <form method="post" action="#reservations">
+                                <input type='hidden' name='method' value='add'>
                                 <?php
-                                    formInput($nameKey, $nameValue, $nameValid, 'Name');
-                                    formInput($arrivalKey, $arrivalValue, $arrivalTime, 'Anreisetag', 'date');
-                                    formInput($departureKey, $departureValue, $departureTime, 'Abreisetag', 'date');
+                                    echo uiFormInput(NAME_KEY, $nameValue, $nameValid, 'Name');
+                                    echo uiFormInput(ARRIVAL_KEY, $arrivalValue, $arrivalTime, 'Anreisetag', 'date');
+                                    echo uiFormInput(DEPARTURE_KEY, $departureValue, $departureTime, 'Abreisetag',
+                                        'date');
 
                                     echo $wrongOrderMessage;
                                 ?>
@@ -142,7 +221,7 @@ function formInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
                         <p></p>
                         <?php
                         if($message) {
-                            echo "<div class='alert alert-success text-left'>$message</div>";
+                            echo $message;
                         }
                         ?>
                         <ul class="list-group">
@@ -155,8 +234,16 @@ function formInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text') {
                                     $start = date($format, strtotime($reservation->start));
                                     $end = date($format, strtotime($reservation->end));
                                     $name = $reservation->name;
+                                    $isNew = $addedId == $reservation->id;
+                                    $deleteLink =
+                                        uiDeleteLink($reservation->id, 'Löschen', $isNew ? 'default' : 'primary');
+                                    $active = $isNew ? ' active' : '';
 
-                                    echo "<li class='list-group-item'><div>$name</div><div>$start - $end</div></li>";
+                                    echo "<li class='list-group-item$active'>
+                                            <div>$name</div>
+                                            <div>$start - $end</div>
+                                            <div>$deleteLink</div>
+                                          </li>";
                                 }
                             ?>
                         </ul>

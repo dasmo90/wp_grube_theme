@@ -1370,6 +1370,14 @@ a.anchor {
     color: red;
 }
 
+.grube--right-centered {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+}
+
 /*
 * 7.0 Media Queries
 * --------------------------------------------------------------------

@@ -1316,8 +1316,13 @@ color: #000000;
     display: block;
 }
 
+.c-calendar__day {
+    opacity: 0.5;
+}
+
 .c-calendar__day.inMonth{
     font-weight: bold;
+    opacity: 1;
 }
 
 .c-calendar__day.reserved{

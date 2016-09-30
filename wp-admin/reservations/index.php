@@ -26,11 +26,9 @@ function hasCollision($arrivalDate, $departureDate) {
     $tableName = RESERVATIONS_TABLE;
     $query = "SELECT COUNT(*)
               FROM $tableName
-              WHERE
-                (end >= '$arrivalDate' AND end <= '$departureDate')
-                OR
-                (start <= '$arrivalDate' AND start >= '$departureDate')";
+              WHERE NOT (start > '$departureDate' OR '$arrivalDate' > end)";
     $reservations = $wpdb->get_var($query);
+    echo $reservations;
     return intval($reservations) > 0;
 }
 
@@ -227,7 +225,8 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
                         <ul class="list-group">
                             <?php
                                 $now = date("Y-M-d");
-                                $query = "SELECT * FROM reservations WHERE '$now' <= end ORDER BY start";
+                                $reservationsTable = RESERVATIONS_TABLE;
+                                $query = "SELECT * FROM $reservationsTable WHERE '$now' <= end ORDER BY start";
                                 $reservations = $wpdb->get_results($query, OBJECT);
 
                                 foreach($reservations as $reservation) {

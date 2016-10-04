@@ -105,7 +105,7 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
     $inputClass = $valid ? '' : ' invalid';
     $message = $valid ? '' : "<p class='form-error-message'>$fieldName ist ungültig.</p>";
     return "<div class='form-group'>
-            <label for='arrival_day'>$fieldName:</label>
+            <label for='$paramKey'>$fieldName:</label>
               <input class='form-control$inputClass'
                      type='$type'
                      id='$paramKey'
@@ -116,7 +116,6 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
           </div>";
 }
 ?>
-
 
 <div class="container">
     <div class="row">
@@ -133,8 +132,6 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
                     </header>
 
                     <?php
-
-                    uiMessage('', 'tes', 'te', 't');
 
                     // defaults
                     $arrivalTime = true;

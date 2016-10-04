@@ -5,7 +5,6 @@
  * @package Nisarg
  */
 
-
 if ( ! function_exists( 'nisarg_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -180,16 +179,16 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
 /**
  * Load custom nav walker
  */
 require get_template_directory() . '/inc/navwalker.php';
 
 /**
- * load reservation plan functions
+ * Load module loader
  */
-require get_template_directory() . '/inc/reservation-plan.php';
-
+require get_template_directory() . '/inc/module-loader.php';
 
 function nisarg_google_fonts() {
 	$query_args = array(
@@ -228,43 +227,4 @@ function nisarg_get_link_url() {
 	$nisarg_has_url = get_url_in_content( $nisarg_content );
 
 	return ( $nisarg_has_url ) ? $nisarg_has_url : apply_filters( 'the_permalink', get_permalink() );
-}
-
-/**
-* Display the post content.
-*
-* @since 0.71
-*
-* @param string $more_link_text Optional. Content for when there is more text.
-* @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
-*/
-function the_content_filtered( $more_link_text = null, $strip_teaser = false) {
-	$content = get_the_content( $more_link_text, $strip_teaser );
-
-	/**
-	* Filters the post content.
-	*
-	* @since 0.71
-	*
-	* @param string $content Content of the current post.
-	*/
-	$content = apply_filters( 'the_content', $content );
-	$content = str_replace( ']]>', ']]&gt;', $content );
-
-	$price_calc = file_get_contents('html/price_calc.html', FILE_USE_INCLUDE_PATH);
-	$content = str_replace( '!++price_calc++!', $price_calc, $content);
-
-	ob_start();
-	include('html/reservation_plan.html');
-	$reservation_plan = ob_get_clean();
-
-	$content = str_replace( '!++reservation_plan++!', $reservation_plan, $content);
-	echo $content;
-}
-
-function the_exerpt_filtered() {
-	$content = apply_filters( 'the_excerpt', get_the_excerpt() );
-	$content = str_replace( '!++price_calc++!', '<p><a href="preise#price_calc">&raquo; Preisrechner</a></p>', $content);
-	$content = str_replace( '!++reservation_plan++!', '<p><a href="#">&raquo; Reservierungsplan</a></p>', $content);
-	echo $content;
 }

@@ -1324,12 +1324,12 @@ color: #000000;
 }
 
 .c-calendar__day {
-    opacity: 0.25;
+    visibility: hidden;
 }
 
 .c-calendar__day.inMonth{
     font-weight: bold;
-    opacity: 1;
+    visibility: visible;
 }
 
 .c-calendar__day.reserved{

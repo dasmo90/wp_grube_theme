@@ -1293,8 +1293,15 @@ color: #000000;
     margin-top: 5px;
 }
 
+.c-calendar:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
 .c-calendar__month {
     border-bottom: darkgray 1pt dashed;
+    float: left;
     padding: 8px 8px 10px 0;
     display: inline-block;
     width: 50%;
@@ -1317,7 +1324,7 @@ color: #000000;
 }
 
 .c-calendar__day {
-    opacity: 0.5;
+    opacity: 0.25;
 }
 
 .c-calendar__day.inMonth{
@@ -1525,6 +1532,7 @@ a.anchor {
 @media (max-width: 650px) {
 
     .c-calendar__month {
+        float: none;
         display: block;
         width: auto;
     }

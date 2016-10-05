@@ -1,0 +1,187 @@
+h1 {
+	font-size: 26px;
+}
+
+/* override */
+th, td {
+	padding: 0.6em;
+}
+
+.navbar-brand {
+	height: auto;
+}
+
+.navbar-subline {
+	font-size: 14px;
+	font-weight: 200;
+}
+
+.c-grubeWidget {
+	border-top: darkgray 1pt solid;
+	border-left: darkgray 12pt solid;
+	border-bottom: darkgray 1pt solid;
+	padding-bottom: 15pt;
+	padding-left: 10pt;
+}
+
+* + .c-priceCalc__label {
+	margin-top: 20px;
+}
+
+.c-priceCalc__select {
+	margin-top: 5px;
+}
+
+.c-calendar:after {
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.c-calendar__month {
+	border-bottom: darkgray 1pt dashed;
+	float: left;
+	padding: 8px 8px 10px 0;
+	display: inline-block;
+	width: 50%;
+}
+
+.c-calendar__monthHeader {
+	position: relative;
+}
+.c-calendar__monthView {
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.c-calendar__monthView table {
+	table-layout: fixed;
+}
+
+.c-calendar__monthView.visible {
+	display: block;
+}
+
+.c-calendar__day {
+	visibility: hidden;
+}
+
+.c-calendar__day.inMonth{
+	font-weight: bold;
+	visibility: visible;
+}
+
+.c-calendar__day.reserved{
+	background-color: indianred;
+	color: white;
+}
+
+.c-calendar__day.halfReserved{
+	background-color: lightsalmon;
+	color: white;
+}
+
+.c-calendar__monthReservation {
+	display: none;
+	position: absolute;
+	right: 0;
+}
+
+.c-calendar__monthReservation::after {
+	border-radius: 7px;
+	content: " ";
+	display: inline-block;
+	height: 14px;
+	margin-left: 6px;
+	width: 28px;
+}
+
+.c-calendar__monthReservation.full::after {
+	background-color: indianred;
+}
+
+.c-calendar__monthReservation.almostFull::after {
+	background-color: lightsalmon;
+}
+
+.c-calendar__monthReservation.almostEmpty::after {
+	background-color: yellowgreen;
+}
+
+.c-calendar__monthReservation.empty::after {
+	background-color: forestgreen;
+}
+
+a.anchor {
+	position: relative;
+	top: -80px;
+}
+
+.form-error-message {
+	color: red;
+}
+
+.grube--right-centered {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: auto;
+}
+
+
+@media (max-width: 900px){
+	/** changed */
+	th, td {
+		padding: 0.6em;
+	}
+}
+
+@media (max-width: 767px) {
+
+	/* changed responsive behaviour */
+	.content-area {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+
+/* calendar one column layout */
+@media (max-width: 650px) {
+
+	.c-calendar__month {
+		float: none;
+		display: block;
+		width: auto;
+	}
+
+	.c-calendar__month:last-child {
+		border-bottom: none;
+		padding: 8px 8px 0 0;
+	}
+
+	.c-calendar__monthHeader {
+		cursor: pointer;
+	}
+
+	.c-calendar__monthReservation {
+		display: inline;
+	}
+
+	.c-calendar__monthView {
+		display: none;
+		text-align: center;
+	}
+
+	.c-calendar__monthView .emptyWeek {
+		display: none;
+	}
+
+	.c-calendar__monthTable {
+		max-width: 380px;
+		display: inline-block;
+	}
+}
+
+

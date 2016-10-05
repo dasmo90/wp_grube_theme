@@ -152,9 +152,16 @@ function nisarg_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	// scooch
+	/**
+	 * Scooch
+	 */
+	wp_enqueue_style( 'grube', get_template_directory_uri().'/css/grube.css' );
 
-	wp_enqueue_script( 'scooch', get_template_directory_uri() . '/js/scooch.js',array('jquery'),'',true);
+	wp_enqueue_style( 'scooch', get_template_directory_uri().'/css/scooch.css' );
+
+	wp_enqueue_style( 'scooch-style', get_template_directory_uri().'/css/scooch-style.css' );
+
+	wp_enqueue_script( 'scooch', get_template_directory_uri() . '/js/scooch.js', array('jquery'));
 }
 add_action( 'wp_enqueue_scripts', 'nisarg_scripts' );
 

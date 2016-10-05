@@ -11,9 +11,9 @@ function the_content_filtered($more_link_text = null, $strip_teaser = false)
 {
     $content = get_the_content($more_link_text, $strip_teaser);
 
-    $content = replace_template('price-calculator', $content);
-    $content = replace_template('reservation-plan', $content);
-    $content = replace_template('gallery', $content);
+    $content = save_modules('price-calculator', $content);
+    $content = save_modules('reservation-plan', $content);
+    $content = save_modules('gallery', $content);
 
     /**
      * Filters the post content.
@@ -24,7 +24,16 @@ function the_content_filtered($more_link_text = null, $strip_teaser = false)
      */
     $content = apply_filters('the_content', $content);
     $content = str_replace(']]>', ']]&gt;', $content);
+
+    $content = replace_template('price-calculator', $content);
+    $content = replace_template('reservation-plan', $content);
+    $content = replace_template('gallery', $content);
+
     echo $content;
+}
+
+function save_modules($tag, $content) {
+    return preg_replace("/\[\s*$tag(.*?)\]/", "<$tag\$1></$tag>", $content);
 }
 
 class TemplateException extends Exception { }
@@ -37,8 +46,9 @@ $ml_regexAttrs = "$ml_regexAttr(\s+$ml_regexAttr)*?";
 function ml_regexFrom($tag)
 {
     global $ml_regexAttrs;
+    return "/<$tag(\s($ml_regexAttrs)\s*|\s*)(>(.*)<\/$tag>|\/>)/";
     // return "/&lt;$tag(\s($ml_regexAttrs)\s*|\s*)(&gt;(.*)&lt;\/$tag&gt;|\/&gt;)/";
-    return "/\[\s*$tag(\s($ml_regexAttrs)\s*|\s*)\]/";
+    // return "/\[\s*$tag(\s($ml_regexAttrs)\s*|\s*)\]/";
 }
 
 function parameterMap($key, $values)
@@ -58,15 +68,13 @@ function replace_template($xmlTag, $content)
         for ($i = 0; $i < count($matches[0]); ++$i) {
             $replace = $matches[0][$i];
             $attributes = $matches[1][$i];
-            // only in xml query
-            // $body = $matches[9][$i];
+            $body = $matches[9][$i];
             preg_match_all("/$ml_regexAttr/", $attributes, $matches);
             ob_start();
             $parameters = parameterMap($matches[1], $matches[2]);
             include(get_template_directory() . "/module-templates/$xmlTag.module.php");
             $templateContent = ob_get_clean();
             $templateContent = trim(preg_replace('/\s+/', ' ', $templateContent));
-
             $content = str_replace($replace, $templateContent, $content);
         }
     }

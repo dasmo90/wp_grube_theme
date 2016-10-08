@@ -24,6 +24,44 @@ th, td {
 	padding-left: 10pt;
 }
 
+a.anchor {
+	position: relative;
+	top: -80px;
+}
+
+.form-error-message {
+	color: red;
+}
+
+.grube--right-centered {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: auto;
+}
+
+
+@media (max-width: 900px){
+	/** changed */
+	th, td {
+		padding: 0.6em;
+	}
+}
+
+@media (max-width: 767px) {
+
+	/* changed responsive behaviour */
+	.content-area {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+/**
+ * Price calculator module.
+ */
+
 * + .c-priceCalc__label {
 	margin-top: 20px;
 }
@@ -31,6 +69,10 @@ th, td {
 .c-priceCalc__select {
 	margin-top: 5px;
 }
+
+/**
+ * Calendar module.
+ */
 
 .c-calendar:after {
 	clear: both;
@@ -112,41 +154,6 @@ th, td {
 	background-color: forestgreen;
 }
 
-a.anchor {
-	position: relative;
-	top: -80px;
-}
-
-.form-error-message {
-	color: red;
-}
-
-.grube--right-centered {
-	position: absolute;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
-	width: auto;
-}
-
-
-@media (max-width: 900px){
-	/** changed */
-	th, td {
-		padding: 0.6em;
-	}
-}
-
-@media (max-width: 767px) {
-
-	/* changed responsive behaviour */
-	.content-area {
-		padding-left: 0;
-		padding-right: 0;
-	}
-}
-
-
 /* calendar one column layout */
 @media (max-width: 650px) {
 
@@ -182,6 +189,150 @@ a.anchor {
 		max-width: 380px;
 		display: inline-block;
 	}
+
+	.c-calendar__day {
+		visibility: visible;
+		opacity: 0.5;
+	}
+
+	.c-calendar__day.inMonth{
+		opacity: 1;
+	}
 }
 
+/**
+ * Gallery module.
+ */
 
+.c-gallery {
+	position: relative;
+	height: 380px;
+	margin: 0 -4em;
+}
+
+@media (max-width: 900px) {
+	.c-gallery {
+		margin: 0 -1.5em;
+	}
+}
+
+.c-gallery__outer {
+	height: 100%;
+}
+
+.c-gallery__inner {
+	height: 100%;
+}
+
+.c-gallery__item {
+	position: relative;
+	height: 100%;
+	background-color: black;
+	text-align: center;
+}
+
+.c-gallery__item-caption {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 80%;
+	color: black;
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 0.5em 1.5em;
+	margin: 0.5em;
+	font-style: italic;
+}
+
+.c-gallery__item > img {
+	height: 100%;
+}
+
+.c-gallery__control {
+	position: absolute;
+}
+
+.c-gallery__control-arrow {
+	cursor: pointer;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 40px;
+	height: 60px;
+	background-color: gray;
+	transition: all 200ms ease-out;
+}
+
+.c-gallery__control-arrow.m-inactive {
+	width: 20px;
+	height: 30px;
+	font-size: 0.5%;
+}
+
+.c-gallery__control-arrow > * {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
+.c-gallery__control-arrow--prev {
+	left: 0;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.c-gallery__control-arrow--prev.m-inactive {
+	left: -20px;
+}
+
+.c-gallery__control-arrow--next {
+	right: 0;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.c-gallery__control-arrow--next.m-inactive {
+	right: -20px;
+}
+
+.c-gallery__control-boobles {
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+	padding: 3px 12px 0;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: gray;
+}
+
+.c-gallery__control-booble {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	background-color: white;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	margin: 0 5px;
+}
+
+.c-gallery__control-booble:after {
+	position: absolute;
+	content: "";
+	background-color: gray;
+	top: 50%;
+	left: 50%;
+	height: 0;
+	width: 0;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 400ms ease;
+}
+
+.c-gallery__control-booble.m-active:after  {
+	height: 12px;
+	width: 12px;
+}

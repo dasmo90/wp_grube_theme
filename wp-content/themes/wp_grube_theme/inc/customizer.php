@@ -299,7 +299,7 @@ function nisarg_get_color_scheme_css( $colors ) {
 
 	
 	.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-		color: {$colors['accent_color']};			
+		color: {$colors['accent_color']};
 	}
 
 	@media (min-width: 768px){
@@ -405,6 +405,18 @@ function nisarg_get_color_scheme_css( $colors ) {
 
 	.c-grubeWidget.-accent {
 		border-color: {$colors['accent_color']};
+	}
+
+	.c-gallery__control-arrow.-accent {
+		background-color: {$colors['accent_color']};
+	}
+
+	.c-gallery__control-boobles.-accent {
+		background-color: {$colors['accent_color']};
+	}
+
+	.c-gallery__control-boobles.-accent .c-gallery__control-booble:after {
+		background-color: {$colors['accent_color']};
 	}
 
 CSS;

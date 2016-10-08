@@ -1,5 +1,10 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'scooch_library' );
+/**
+ * Gallery module. (overwrites default theme behaviour)
+ *
+ * @global body (unused)
+ * @global parameters
+ */
 ?>
 
 <div class="m-scooch m-fluid">

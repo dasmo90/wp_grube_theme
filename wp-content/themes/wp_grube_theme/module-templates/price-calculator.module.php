@@ -1,4 +1,12 @@
-<div class="c-grubeWidget c-priceCalc">
+<?php
+/**
+ * Price calculator module.
+ *
+ * @global body (unused)
+ * @global parameters
+ */
+?>
+<div class="c-grubeWidget -accent c-priceCalc">
     <a id="price_calc" class="anchor"></a>
     <h3 >Preisrechner</h3>
     <div class="c-priceCalc__label"><label for="arrival_month">Wann wollen Sie anreisen?</label></div>
@@ -34,9 +42,7 @@
     <div class="c-priceCalc__label">
         <strong>Preis pro Übernachtung: <span id="price_per_night" style="margin-left: 10pt;">-</span></strong>
     </div>
-    <p>
-        <?php echo $body; ?>
-    </p>
+    <?php echo "<p>$body</p>"; ?>
     <script>
         var monthTable = [<?php echo $parameters['january']; ?>,
                           <?php echo $parameters['february']; ?>,

@@ -205,19 +205,19 @@ a.anchor {
  */
 
 .c-gallery {
+	margin-bottom: 1em;
+}
+
+.c-gallery__outer {
 	position: relative;
 	height: 380px;
 	margin: 0 -4em;
 }
 
 @media (max-width: 900px) {
-	.c-gallery {
+	.c-gallery__outer {
 		margin: 0 -1.5em;
 	}
-}
-
-.c-gallery__outer {
-	height: 100%;
 }
 
 .c-gallery__inner {
@@ -227,22 +227,8 @@ a.anchor {
 .c-gallery__item {
 	position: relative;
 	height: 100%;
-	background-color: black;
+	/*background-color: black;*/
 	text-align: center;
-}
-
-.c-gallery__item-caption {
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	max-width: 80%;
-	color: black;
-	border-radius: 5px;
-	background-color: rgba(255, 255, 255, 0.5);
-	padding: 0.5em 1.5em;
-	margin: 0.5em;
-	font-style: italic;
 }
 
 .c-gallery__item > img {
@@ -257,15 +243,16 @@ a.anchor {
 	cursor: pointer;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 40px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	background-color: gray;
 	transition: all 200ms ease-out;
+	box-shadow: 1px 1px 8px gray;
 }
 
 .c-gallery__control-arrow.m-inactive {
-	width: 20px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	font-size: 0.5%;
 }
 
@@ -278,23 +265,21 @@ a.anchor {
 }
 
 .c-gallery__control-arrow--prev {
-	left: 0;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
+	left: 0.8em;
+	border-radius: 50%;
 }
 
 .c-gallery__control-arrow--prev.m-inactive {
-	left: -20px;
+	left: -30px;
 }
 
 .c-gallery__control-arrow--next {
-	right: 0;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
+	right: 0.8em;
+	border-radius: 50%;
 }
 
 .c-gallery__control-arrow--next.m-inactive {
-	right: -20px;
+	right: -30px;
 }
 
 .c-gallery__control-boobles {
@@ -305,10 +290,10 @@ a.anchor {
 	padding: 3px 12px 0;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	background-color: gray;
 }
 
 .c-gallery__control-booble {
+	box-shadow: 1px 1px 8px gray;
 	cursor: pointer;
 	position: relative;
 	display: inline-block;
@@ -335,4 +320,20 @@ a.anchor {
 .c-gallery__control-booble.m-active:after  {
 	height: 12px;
 	width: 12px;
+}
+
+.c-gallery__captions {
+	margin-top: 5px;
+	min-height: 3em;
+}
+
+.c-gallery__caption {
+	display: none;
+	font-style: italic;
+	transition: all 100ms ease-in;
+	padding: 0 1em;
+}
+
+.c-gallery__caption.-active {
+	display: block;
 }

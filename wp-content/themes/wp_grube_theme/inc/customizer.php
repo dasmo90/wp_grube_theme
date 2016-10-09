@@ -415,6 +415,10 @@ function nisarg_get_color_scheme_css( $colors ) {
 		background-color: {$colors['accent_color']};
 	}
 
+	.c-gallery__control-arrow.-accent:hover > *, .c-gallery__control-arrow.-accent:active > * {
+		color: {$colors['accent_color']};
+	}
+
 	.c-gallery__control-boobles.-accent .c-gallery__control-booble {
 		border-color: {$colors['accent_color']};
 	}

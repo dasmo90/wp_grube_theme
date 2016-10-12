@@ -28,7 +28,6 @@ function hasCollision($arrivalDate, $departureDate) {
               FROM $tableName
               WHERE NOT (start > '$departureDate' OR '$arrivalDate' > end)";
     $reservations = $wpdb->get_var($query);
-    echo $reservations;
     return intval($reservations) > 0;
 }
 

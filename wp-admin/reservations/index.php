@@ -220,7 +220,7 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
                         ?>
                         <ul class="list-group">
                             <?php
-                                $now = date("Y-M-d");
+                                $now = date("Y-m-d");
                                 $reservationsTable = RESERVATIONS_TABLE;
                                 $query = "SELECT * FROM $reservationsTable WHERE '$now' <= end ORDER BY start";
                                 $reservations = $wpdb->get_results($query, OBJECT);

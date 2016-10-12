@@ -33,8 +33,6 @@ $maxSize = $parameters['max-size'] | 6;
         ?>
         </div>
 
-        <?php if ($size > 1 && $size < $maxSize): ?>
-
         <div class="c-gallery__controls m-scooch-controls">
             <span class="c-gallery__control c-gallery__control-arrow -accent c-gallery__control-arrow--prev"
                   data-m-slide="prev">
@@ -44,16 +42,19 @@ $maxSize = $parameters['max-size'] | 6;
                   data-m-slide="next">
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </span>
-            <span class="c-gallery__control c-gallery__control-boobles -accent">
-                <?php
-                for($i = 1; $i <= $size;++$i) {
-                    $mActive = $i === 0 ? ' m-active' : '';
-                    echo "<span data-m-slide='$i' class='c-gallery__control-booble$mActive'></span>";
-                }
-                ?>
+
+            <?php if ($size > 1 && $size < $maxSize): ?>
+                <span class="c-gallery__control c-gallery__control-boobles -accent">
+                    <?php
+                    for($i = 1; $i <= $size;++$i) {
+                        $mActive = $i === 0 ? ' m-active' : '';
+                        echo "<span data-m-slide='$i' class='c-gallery__control-booble$mActive'></span>";
+                    }
+                    ?>
+                </span>
+            <?php endif ?>
         </div>
 
-        <?php endif ?>
     </div>
     <div class="c-gallery__captions">
     <?php

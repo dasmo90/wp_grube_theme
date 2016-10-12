@@ -210,8 +210,8 @@ a.anchor {
 
 .c-gallery__outer {
 	position: relative;
-	height: 380px;
 	margin: 0 -4em;
+	background-color: #eee;
 }
 
 @media (max-width: 900px) {
@@ -221,38 +221,42 @@ a.anchor {
 }
 
 .c-gallery__inner {
-	height: 100%;
 }
 
 .c-gallery__item {
 	position: relative;
-	height: 100%;
-	/*background-color: black;*/
 	text-align: center;
 }
 
 .c-gallery__item > img {
-	height: 100%;
+	margin-bottom: 0;
 }
 
 .c-gallery__control {
+	font-size: 1.8em;
 	position: absolute;
+}
+
+@media (max-width: 767px) {
+	.c-gallery__control {
+		font-size: 1.4em;
+	}
 }
 
 .c-gallery__control-arrow {
 	cursor: pointer;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 50px;
-	height: 50px;
+	width: 2.25em;
+	height: 2.25em;
 	background-color: gray;
 	transition: all 200ms ease-out;
 	box-shadow: 1px 1px 8px gray;
 }
 
-.c-gallery__control-arrow:hover, .c-gallery__control-arrow:active {
-	width: 52px;
-	height: 52px;
+.c-gallery__control-arrow:hover {
+	width: 2.3em;
+	height: 2.3em;
 	background-color: white;
 }
 
@@ -270,13 +274,17 @@ a.anchor {
 	color: white;
 }
 
-.c-gallery__control-arrow:hover > *, .c-gallery__control-arrow:active > * {
+.c-gallery__control-arrow:hover > * {
 	color: gray;
 }
 
 .c-gallery__control-arrow--prev {
-	left: 0.8em;
+	left: 5%;
 	border-radius: 50%;
+}
+
+.c-gallery__control-arrow--prev > i {
+	padding-right: 5px;
 }
 
 .c-gallery__control-arrow--prev.m-inactive {
@@ -284,8 +292,12 @@ a.anchor {
 }
 
 .c-gallery__control-arrow--next {
-	right: 0.8em;
+	right: 5%;
 	border-radius: 50%;
+}
+
+.c-gallery__control-arrow--next > i {
+	  padding-left: 5px;
 }
 
 .c-gallery__control-arrow--next.m-inactive {
@@ -308,8 +320,8 @@ a.anchor {
 	position: relative;
 	display: inline-block;
 	background-color: white;
-	height: 16px;
-	width: 16px;
+	height: 0.8em;
+	width: 0.8em;
 	border-radius: 50%;
 	margin: 0 5px;
 }
@@ -328,8 +340,8 @@ a.anchor {
 }
 
 .c-gallery__control-booble.m-active:after  {
-	height: 12px;
-	width: 12px;
+	height: 0.6em;
+	width: 0.6em;
 }
 
 .c-gallery__captions {

@@ -24,17 +24,16 @@ $maxSize = $parameters['max-size'] | 6;
             $id = $matches[0][$i];
             $mActive = $i === 0 ? ' m-active' : '';
             $imageSrc = wp_get_attachment_image_src($id)[0];
-            $imageSizes = wp_get_attachment_image_sizes($id);
             $imageSrcset = wp_get_attachment_image_srcset($id);
 
             echo "<div class='c-gallery__item m-item$mActive'>
-                    <img src='$imageSrc' srcset='$imageSrcset' sizes='$imageSizes' >
+                    <img src='$imageSrc' srcset='$imageSrcset' sizes='100vw' >
                   </div>";
-    }
+        }
         ?>
         </div>
 
-        <?php if ($size < $maxSize): ?>
+        <?php if ($size > 1 && $size < $maxSize): ?>
 
         <div class="c-gallery__controls m-scooch-controls">
             <span class="c-gallery__control c-gallery__control-arrow -accent c-gallery__control-arrow--prev"

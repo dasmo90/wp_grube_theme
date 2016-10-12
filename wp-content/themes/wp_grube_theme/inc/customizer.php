@@ -415,7 +415,7 @@ function nisarg_get_color_scheme_css( $colors ) {
 		background-color: {$colors['accent_color']};
 	}
 
-	.c-gallery__control-arrow.-accent:hover > *, .c-gallery__control-arrow.-accent:active > * {
+	.c-gallery__control-arrow.-accent:hover > * {
 		color: {$colors['accent_color']};
 	}
 

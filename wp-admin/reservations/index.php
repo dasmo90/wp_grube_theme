@@ -195,7 +195,7 @@ function uiFormInput($paramKey, $paramValue, $valid, $fieldName, $type = 'text')
 
                     <div class="entry-content">
 
-                        <div class="c-grubeWidget c-reservations">
+                        <div class="c-grubeWidget -accent c-reservations">
                             <a id="reservations"></a>
                             <h3>Reservierung hinzufügen</h3>
                             <form method="post" action="#reservations">

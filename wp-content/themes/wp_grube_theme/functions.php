@@ -206,8 +206,11 @@ function nisarg_google_fonts() {
 
 		'family' => 'Lato:400,300italic,700|Source+Sans+Pro:400,400italic'
 	);
+	/*
+	 * TODO
 	wp_register_style( 'nisarggooglefonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
 	wp_enqueue_style( 'nisarggooglefonts');
+	*/
 }
             
 add_action('wp_enqueue_scripts', 'nisarg_google_fonts');

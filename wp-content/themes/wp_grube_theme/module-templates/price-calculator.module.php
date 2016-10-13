@@ -7,7 +7,7 @@
  */
 ?>
 <div class="c-grubeWidget -accent c-priceCalc">
-    <a id="price_calc" class="anchor"></a>
+    <a id="widget-main" class="anchor"></a>
     <h3 >Preisrechner</h3>
     <div class="c-priceCalc__label"><label for="arrival_month">Wann wollen Sie anreisen?</label></div>
     <div class="c-priceCalc__select">

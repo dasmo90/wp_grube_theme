@@ -135,7 +135,7 @@ function reservationCalendar($months = 12, $monthOffset = 0)
 
     $reservations = obtainReservationsBetween($start, $end);
 
-    $calendar = '<div class="c-grubeWidget -accent c-calendar">';
+    $calendar = '<div class="c-grubeWidget -accent c-calendar"><a id="widget-main" class="anchor"></a>';
     for ($i = $monthOffset; $i < $monthOffset + $months; $i++) {
         $calendar .= reservationMonth($i, $reservations);
     }

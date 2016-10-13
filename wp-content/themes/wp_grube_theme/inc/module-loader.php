@@ -25,7 +25,6 @@ function the_content_filtered($more_link_text = null, $strip_teaser = false)
     $content = apply_filters('the_content', $content);
     $content = str_replace(']]>', ']]&gt;', $content);
 
-
     $content = replace_images($content);
 
     $content = replace_template('price-calculator', $content);
@@ -54,22 +53,24 @@ function replace_images($content) {
 }
 
 function escape_modules($tag, $content) {
-    return preg_replace("/\[\s*$tag(.*?)\]/", "<$tag\$1></$tag>", $content);
+    return preg_replace("/\\[\\s*$tag(.*?)\\]/", "<$tag\$1></$tag>", $content);
 }
 
 class TemplateException extends Exception { }
 
 $ml_regexAttrName = '[a-zA-Z][\w\-]*[\w\d]';
-$ml_regexAttrValue = '[\w\-,]*';
-$ml_regexAttr = "($ml_regexAttrName)\s*=\s*\"($ml_regexAttrValue)\"";
-$ml_regexAttrs = "$ml_regexAttr(\s+$ml_regexAttr)*?";
+$ml_regexAttrValue = '.*?';
+$ml_regexAttr = "($ml_regexAttrName)\\s*=\\s*\"($ml_regexAttrValue)\"";
+$ml_regexAttrs = "$ml_regexAttr(\\s+$ml_regexAttr)*?";
 
-function ml_regexFrom($tag)
+function ml_regexFrom($tag, $simple = false)
 {
     global $ml_regexAttrs;
-    return "/<$tag(\s($ml_regexAttrs)\s*|\s*)(>(.*)<\/$tag>|\/>)/";
-    // return "/&lt;$tag(\s($ml_regexAttrs)\s*|\s*)(&gt;(.*)&lt;\/$tag&gt;|\/&gt;)/";
-    // return "/\[\s*$tag(\s($ml_regexAttrs)\s*|\s*)\]/";
+    if($simple) {
+        return "/<$tag(\\s(.*?)\\s*|\\s*)(>(.*)<\\/$tag>|\\/>)/";
+    } else {
+        return "/<$tag(\\s($ml_regexAttrs)\\s*|\\s*)(>(.*)<\\/$tag>|\\/>)/";
+    }
 }
 
 function parameterMap($key, $values)
@@ -105,10 +106,22 @@ function replace_template($xmlTag, $content)
 function the_exerpt_filtered()
 {
     $content = get_the_excerpt();
-    $content = preg_replace(ml_regexFrom('price-calculator'), '<p><a href="preise#price_calc">&raquo; Preisrechner</a></p>', $content);
-    $content = preg_replace(ml_regexFrom('reservation-plan'), '<p><a href="#">&raquo; Reservierungsplan</a></p>', $content);
+
+    $content = escape_modules('price-calculator', $content);
+    $content = escape_modules('reservation-plan', $content);
+
+    $content = preg_replace(ml_regexFrom('price-calculator', true),
+        '<div class="c-grubeWidget -accent c-grubeWidget--small">
+            <a href="preise#widget-main">Zum Preisrechner</a>
+         </div><p></p>',
+        $content);
+    $content = preg_replace(ml_regexFrom('reservation-plan', true),
+        '<div class="c-grubeWidget -accent c-grubeWidget--small">
+            <a href="belegungsplan-und-reservierung#widget-main">Zum Reservierungsplan</a>
+         </div><p></p>', $content);
 
     $content = apply_filters('the_excerpt', $content);
+
     echo $content;
 }
 

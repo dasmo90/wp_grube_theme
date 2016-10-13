@@ -28,9 +28,13 @@ th, td {
 	padding-left: 10pt;
 }
 
+.c-grubeWidget--small {
+	padding-bottom: 0;
+}
+
 a.anchor {
-	position: relative;
-	top: -80px;
+	position: absolute;
+	top: 0;
 }
 
 .form-error-message {

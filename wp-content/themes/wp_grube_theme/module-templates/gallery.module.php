@@ -35,10 +35,12 @@ $maxSize = $parameters['max-size'] | 6;
 
         <div class="c-gallery__controls m-scooch-controls">
             <span class="c-gallery__control c-gallery__control-arrow -accent c-gallery__control-arrow--prev"
+                  tabindex="1"
                   data-m-slide="prev">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </span>
             <span class="c-gallery__control c-gallery__control-arrow -accent c-gallery__control-arrow--next"
+                  tabindex="2"
                   data-m-slide="next">
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </span>

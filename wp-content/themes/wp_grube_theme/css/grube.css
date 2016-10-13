@@ -255,9 +255,14 @@ a.anchor {
 }
 
 .c-gallery__control-arrow:hover {
-	width: 2.3em;
-	height: 2.3em;
+	width: 2.35em;
+	height: 2.35em;
 	background-color: white;
+}
+
+.c-gallery__control-arrow:focus {
+	background-color: gray;
+	outline: none;
 }
 
 .c-gallery__control-arrow.m-inactive {
@@ -278,8 +283,12 @@ a.anchor {
 	color: gray;
 }
 
+.c-gallery__control-arrow:focus > * {
+	color: white;
+}
+
 .c-gallery__control-arrow--prev {
-	left: 5%;
+	left: 3%;
 	border-radius: 50%;
 }
 
@@ -292,7 +301,7 @@ a.anchor {
 }
 
 .c-gallery__control-arrow--next {
-	right: 5%;
+	right: 3%;
 	border-radius: 50%;
 }
 

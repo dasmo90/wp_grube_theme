@@ -10,8 +10,8 @@
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<span class="screen-reader-text"><?php esc_html_e( 'Nothing Found', 'nisarg' ); ?></span>
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'nisarg' ); ?></h1>
+		<span class="screen-reader-text"><?php esc_html_e( 'Nichts gefunden', 'nisarg' ); ?></span>
+		<h1 class="page-title"><?php esc_html_e( 'Nichts gefunden', 'nisarg' ); ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -21,13 +21,18 @@
 
 		<?php elseif ( is_search() ) : ?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'nisarg' ); ?></p>
-			<?php get_search_form(); ?>
+			<p><?php esc_html_e( 'Leider wurde nichts gefunden. Versuchen Sie etwas anderes (;', 'nisarg' ); ?></p>
+			<?php
+			//get_search_form();
+			?>
 
 		<?php else : ?>
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'nisarg' ); ?></p>
-			<?php get_search_form(); ?>
+			<p><?php esc_html_e( 'Sie haben sich verirrt. Vielleicht kann die Suche Ihnen weiterhelfen.', 'nisarg' );
+				?></p>
+			<?php
+			//get_search_form();
+			?>
 
 		<?php endif; ?>
 	</div><!-- .page-content -->
